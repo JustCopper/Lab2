@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Lab2</string>
+    <string name="b_label">b</string>
+    <string name="c_label">c</string>
+    <string name="a_label">a</string>
+    <string name="a_example">1</string>
+    <string name="b_example">-6</string>
+    <string name="c_example">9</string>
+    <string name="btn_label">Вычислить</string>
+    <string name="rootx1">x1: %s </string>
+    <string name="rootx2">x2: %s </string>
+</resources>
