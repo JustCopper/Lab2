@@ -23,26 +23,27 @@ class MainActivity : AppCompatActivity() {
         }
         else {
             val discr = (int_b*int_b - 4 * int_a * int_c)
-            getx(discr.toDouble(),int_a,int_b,int_c)
+            getx(discr.toDouble(),int_a,int_b)
 
         }
     }
 
-    fun getx(discr : Double, a:Int, b:Int, c:Int){
+    fun getx(discr : Double, a:Int, b:Int){
         var rootx1 = (-b + kotlin.math.sqrt(discr)) / (2 * a)
-        rootx1 = String.format("%.2f",rootx1).toDouble()
+        rootx1 = if (rootx1.isNaN() || rootx1 == Double.NEGATIVE_INFINITY || rootx1 == Double.POSITIVE_INFINITY) 0.0 else String.format("%.2f",rootx1).toDouble()
         var rootx2 = (-b - kotlin.math.sqrt(discr)) / (2 * a)
-        rootx2 = String.format("%.2f",rootx2).toDouble()
-        var final = ""
+        rootx2 = if (rootx2.isNaN() || rootx2 == Double.NEGATIVE_INFINITY || rootx2 == Double.POSITIVE_INFINITY) 0.0 else String.format("%.2f",rootx2).toDouble()
+
+        var final: String
         if (discr > 0){
             final = "x1 = $rootx1 || x2 = $rootx2"
 
         }
         else if (discr == 0.0){
-            final = "x1 = $rootx1"
+            final = "x1 = x2 = $rootx1"
         }
         else {
-            final = "x1 = нет || x2 = нет\nКорней нет!"
+            final = "Корней нет!"
         }
         val dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder.setTitle("Результат").setMessage(final).setNeutralButton("OK", { dialog, whichButton ->
