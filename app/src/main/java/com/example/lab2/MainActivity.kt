@@ -22,19 +22,41 @@ class MainActivity : AppCompatActivity() {
             dialogBuilder.show()
         }
         else {
-            val discr = (int_b*int_b - 4 * int_a * int_c)
-            getx(discr.toDouble(),int_a,int_b)
-
+            val answer : Double
+            val root : String
+            if (int_a != 0) {
+                val discr = (int_b * int_b - 4 * int_a * int_c)
+                getx(discr.toDouble(), int_a, int_b)
+            }
+            else if (int_a == 0 && int_b == 0 && int_c != 0){
+                showmsg("","Корней нет!")
+            }
+            else if (int_a == 0 && int_b == 0 && int_c == 0){
+                showmsg("Любое число","x1 = ")
+            }
+            else{
+                answer = (-int_c / int_b).toDouble()
+                root = "x1 = "
+                showmsg(answer.toString(),root)
+            }
         }
     }
 
+    fun showmsg(answer : String,root : String){
+
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle("Результат").setMessage("Л.У:\n$root $answer").setNeutralButton("OK", { dialog, whichButton ->
+            dialog.dismiss()
+        })
+        dialogBuilder.show()
+    }
     fun getx(discr : Double, a:Int, b:Int){
         var rootx1 = (-b + kotlin.math.sqrt(discr)) / (2 * a)
         rootx1 = if (rootx1.isNaN() || rootx1 == Double.NEGATIVE_INFINITY || rootx1 == Double.POSITIVE_INFINITY) 0.0 else String.format("%.2f",rootx1).toDouble()
         var rootx2 = (-b - kotlin.math.sqrt(discr)) / (2 * a)
         rootx2 = if (rootx2.isNaN() || rootx2 == Double.NEGATIVE_INFINITY || rootx2 == Double.POSITIVE_INFINITY) 0.0 else String.format("%.2f",rootx2).toDouble()
 
-        var final: String
+        val final: String
         if (discr > 0){
             final = "x1 = $rootx1 || x2 = $rootx2"
 
